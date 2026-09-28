@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SYSTEM BREAKERS | Tecnologia & Desenvolvimento</title>
+
+    <meta name="description"
+        content="SYSTEM BREAKERS — Programação, bots, automações, sites, sistemas e soluções tecnológicas.">
+
+    <meta name="keywords"
+        content="System Breakers, programação, bots, automação, desenvolvimento, sites, sistemas">
+
+    <meta name="author" content="SYSTEM BREAKERS">
+
+    <meta name="theme-color" content="#05070d">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #05070d;
+            --bg2: #080c16;
+            --card: rgba(11, 18, 32, 0.78);
+            --blue: #087cff;
+            --blue2: #00c8ff;
+            --white: #ffffff;
+            --text: #aebbd0;
+            --muted: #718096;
+            --border: rgba(0, 160, 255, 0.22);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(0, 132, 255, 0.20),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 50%,
+                    rgba(0, 183, 255, 0.08),
+                    transparent 30%
+                ),
+                var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .18;
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, black, transparent);
+            z-index: -1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            background: rgba(5, 7, 13, 0.78);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            min-height: 72px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--blue), var(--blue2));
+            box-shadow: 0 0 28px rgba(0,153,255,.38);
+            font-weight: 900;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 16px;
+        }
+
+        .logo-text span {
+            color: var(--blue2);
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        nav a:hover {
+            color: var(--blue2);
+        }
+
+        .nav-contact {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: rgba(0,153,255,.06);
+        }
+
+        .menu-btn {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 125px 20px 80px;
+            position: relative;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            background: rgba(0,153,255,.12);
+            filter: blur(110px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 950px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 15px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: #8fdcff;
+            background: rgba(0,140,255,.06);
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #00e5ff;
+            box-shadow: 0 0 12px #00e5ff;
+        }
+
+        h1 {
+            font-size: clamp(46px, 9vw, 96px);
+            line-height: .94;
+            font-weight: 1000;
+            letter-spacing: -5px;
+        }
+
+        h1 .blue {
+            color: var(--blue2);
+            text-shadow: 0 0 35px rgba(0,183,255,.28);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(17px, 3vw, 23px);
+            color: #d6e0ec;
+            margin-top: 22px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 20px auto 30px;
+            color: var(--text);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 14px;
+            transition: .25s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--blue2));
+            color: white;
+            box-shadow: 0 0 30px rgba(0,153,255,.22);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0,153,255,.42);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.03);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            transform: translateY(-3px);
+            border-color: var(--blue);
+            color: var(--blue2);
+        }
+
+        .hero-scroll {
+            margin-top: 55px;
+            color: #607086;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* SEÇÕES */
+
+        section {
+            padding: 100px 20px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title small {
+            color: var(--blue2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            font-size: 12px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(31px, 5vw, 52px);
+            margin-top: 10px;
+        }
+
+        .section-title p {
+            color: var(--text);
+            max-width: 680px;
+            margin: 15px auto 0;
+            line-height: 1.7;
+        }
+
+        /* SOBRE */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 35px;
+            margin-bottom: 18px;
+        }
+
+        .about-text p {
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .about-list div {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: #dbe6f3;
+            font-size: 14px;
+        }
+
+        .check {
+            width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: rgba(0,183,255,.1);
+            border: 1px solid var(--border);
+            color: var(--blue2);
+        }
+
+        .terminal {
+            border: 1px solid var(--border);
+            background: #03050a;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 20px 70px rgba(0,0,0,.35);
+        }
+
+        .terminal-top {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #334155;
+        }
+
+        .terminal code {
+            color: #9edfff;
+            line-height: 2;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .terminal .green {
+            color: #68f5b0;
+        }
+
+        .terminal .blue-code {
+            color: #51bfff;
+        }
+
+        /* SERVIÇOS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 28px;
+            border-radius: 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: rgba(0,153,255,.10);
+            filter: blur(45px);
+            right: -50px;
+            top: -50px;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(0,183,255,.55);
+            box-shadow: 0 20px 45px rgba(0,0,0,.25);
+        }
+
+        .icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: rgba(0,153,255,.1);
+            border: 1px solid var(--border);
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .card p {
+            color: var(--text);
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        /* DIFERENCIAIS */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 25px 15px;
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 15px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .feature-icon {
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .feature strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .feature span {
+            color: #8492a6;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* PROCESSO */
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .step {
+            padding: 25px;
+            border-left: 2px solid var(--blue);
+            background: linear-gradient(
+                90deg,
+                rgba(0,153,255,.08),
+                transparent
+            );
+        }
+
+        .number {
+            color: var(--blue2);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin: 10px 0;
+        }
+
+        .step p {
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            padding: 75px 25px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0,153,255,.13),
+                    transparent 65%
+                ),
+                rgba(255,255,255,.02);
+        }
+
+        .cta h2 {
+            font-size: clamp(31px, 5vw, 52px);
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: var(--text);
+            max-width: 620px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        /* CONTATO */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-card {
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--card);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--blue2);
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,.07);
+            padding: 40px 20px;
+            text-align: center;
+            color: #708096;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--blue2);
+        }
+
+        .copyright {
+            margin-top: 10px;
+        }
+
+        /* BOTÃO TOPO */
+
+        #topBtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(5,10,20,.9);
+            color: var(--blue2);
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            font-size: 20px;
+        }
+
+        #topBtn.show {
+            display: block;
+        }
+
+        /* ANIMAÇÃO */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: .7s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 15px;
+                right: 15px;
+                padding: 20px;
+                border-radius: 15px;
+                background: rgba(7,10,18,.97);
+                border: 1px solid var(--border);
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .about,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features,
+            .process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 75px 17px;
+            }
+
+            .nav {
+                padding: 0 15px;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .cards,
+            .features,
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 330px;
+            }
+
+            .terminal {
+                padding: 16px;
+                overflow-x: auto;
+            }
+
+            .terminal code {
+                font-size: 12px;
+            }
+
+            .hero-scroll {
+                margin-top: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <div class="nav">
+
+            <a href="#inicio" class="logo">
+                <div class="logo-icon">&lt;/&gt;</div>
+
+                <div class="logo-text">
+                    SYSTEM <span>BREAKERS</span>
+                </div>
+            </a>
+
+            <nav id="navMenu">
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#processo">Processo</a>
+                <a href="#contato" class="nav-contact">Contato</a>
+            </nav>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Abrir menu">
+                ☰
+            </button>
+
+        </div>
+    </header>
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero" id="inicio">
+
+            <div class="hero-glow"></div>
+
+            <div class="hero-content reveal">
+
+                <div class="badge">
+                    <span class="status-dot"></span>
+                    TECNOLOGIA • DESENVOLVIMENTO • INOVAÇÃO
+                </div>
+
+                <h1>
+                    SYSTEM<br>
+                    <span class="blue">BREAKERS</span>
+                </h1>
+
+                <div class="hero-subtitle">
+                    BREAK THE LIMITS. BUILD THE FUTURE.
+                </div>
+
+                <p>
+                    Criamos soluções digitais, sistemas, sites, bots,
+                    automações e projetos personalizados para transformar
+                    ideias em tecnologia.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="#servicos"
+                        class="btn btn-primary">
+                        🚀 Conhecer serviços
+                    </a>
+
+                    <a
+                        href="https://wa.me/556593356398"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-outline">
+                        💬 Falar no WhatsApp
+                    </a>
+
+                </div>
+
+                <div class="hero-scroll">
+                    ↓ Explore a SYSTEM BREAKERS
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SOBRE -->
+
+        <section id="sobre">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <small>Quem somos</small>
+
+                    <h2>Tecnologia sem limites.</h2>
+
+                    <p>
+                        A SYSTEM BREAKERS trabalha com desenvolvimento
+                        e soluções digitais para projetos de diferentes
+                        tamanhos e necessidades.
+                    </p>
+
+                </div>
+
+                <div class="about">
+
+                    <div class="about-text reveal">
+
+                        <h3>
+                            Transformamos ideias
+                            em projetos reais.
+                        </h3>
+
+                        <p>
+                            Nosso objetivo é unir programação, criatividade
+                            e tecnologia para desenvolver soluções modernas,
+                            funcionais e personalizadas.
+                        </p>
+
+                        <p>
+                            Desde automações e bots até sites e sistemas,
+                            cada projeto pode ser construído de acordo
+                            com as necessidades do cliente.
+                        </p>
+
+                        <div class="about-list">
+
+                            <div>
+                                <span class="check">✓</span>
+                                Projetos personalizados
+                            </div>
+
+                            <div>
+                                <span class="check">✓</span>
+                                Desenvolvimento moderno
+                            </div>
+
+                            <div>
+                                <span class="check">✓</span>
+                                Soluções sob medida
+                            </div>
+
+                            <div>
+                                <span class="check">✓</span>
+                                Suporte e acompanhamento
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="terminal reveal">
+
+                        <div class="terminal-top">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+
+                        <code>
+
+                            <div>
+                                <span class="green">system</span>@
+                                <span class="blue-code">breakers</span>:~$
+                            </div>
+
+                            <div>
+                                initialize_project
+                            </div>
+
+                            <div>
+                                &gt; loading creativity...
+                            </div>
+
+                            <div>
+                                &gt; loading technology...
+                            </div>
+
+                            <div>
+                                &gt; loading innovation...
+                            </div>
+
+                            <br>
+
+                            <div class="green">
+                                ✓ SYSTEM READY
+                            </div>
+
+                            <div class="green">
+                                ✓ PROJECT ONLINE
+                            </div>
+
+                            <div class="green">
+                                ✓ BREAK THE LIMITS
+                            </div>
+
+                        </code>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SERVIÇOS -->
+
+        <section id="servicos">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <small>O que fazemos</small>
+
+                    <h2>Nossos serviços</h2>
+
+                    <p>
+                        Soluções tecnológicas para transformar sua ideia
+                        em um projeto funcional.
+                    </p>
+
+                </div>
+
+                <div class="cards">
+
+                    <article class="card reveal">
+
+                        <div class="icon">💻</div>
+
+                        <h3>Programação</h3>
+
+                        <p>
+                            Desenvolvimento de aplicações, scripts,
+                            sistemas e soluções personalizadas.
+                        </p>
+
+                    </article>
+
+                    <article class="card reveal">
+
+                        <div class="icon">🤖</div>
+
+                        <h3>Bots</h3>
+
+                        <p>
+                            Bots personalizados para automação de tarefas,
+                            atendimento e gerenciamento.
+                        </p>
+
+                    </article>
+
+                    <article class="card reveal">
+
+                        <div class="icon">⚡</div>
+
+                        <h3>Automação</h3>
+
+                        <p>
+                            Automatização de processos para economizar
+                            tempo e melhorar produtividade.
+                        </p>
+
+                    </article>
+
+                    <article class="card reveal">
+
+                        <div class="icon">🌐</div>
+
+                        <h3>Sites</h3>
+
+                        <p>
+                            Sites modernos, responsivos e adaptados
+                            para celular, tablet e computador.
+                        </p>
+
+                    </article>
+
+                    <article class="card reveal">
+
+                        <div class="icon">🛠️</div>
+
+                        <h3>Sistemas</h3>
+
+                        <p>
+                            Criação de sistemas personalizados para
+                            projetos, empresas e serviços.
+                        </p>
+
+                    </article>
+
+                    <article class="card reveal">
+
+                        <div class="icon">🔧</div>
+
+                        <h3>Configuração</h3>
+
+                        <p>
+                            Configuração, integração e suporte para
+                            projetos e ferramentas digitais.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DIFERENCIAIS -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <small>Por que SYSTEM BREAKERS?</small>
+
+                    <h2>Construído para ir além.</h2>
+
+                </div>
+
+                <div class="features">
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">⚡</div>
+
+                        <strong>Performance</strong>
+
+                        <span>
+                            Projetos pensados para funcionar
+                            de forma eficiente.
+                        </span>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">🎯</div>
+
+                        <strong>Personalização</strong>
+
+                        <span>
+                            Cada projeto pode ser adaptado
+                            às suas necessidades.
+                        </span>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">📱</div>
+
+                        <strong>Responsivo</strong>
+
+                        <span>
+                            Experiência adaptada para diferentes
+                            tamanhos de tela.
+                        </span>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="feature-icon">🔐</div>
+
+                        <strong>Organização</strong>
+
+                        <span>
+                            Estrutura preparada para facilitar
+                            manutenção e evolução.
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PROCESSO -->
+
+        <section id="processo">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <small>Como trabalhamos</small>
+
+                    <h2>Do conceito ao projeto.</h2>
+
+                    <p>
+                        Um processo simples para transformar
+                        sua ideia em uma solução digital.
+                    </p>
+
+                </div>
+
+                <div class="process">
+
+                    <div class="step reveal">
+
+                        <div class="number">
+                            01 — IDEIA
+                        </div>
+
+                        <h3>Entendemos</h3>
+
+                        <p>
+                            Analisamos sua ideia, objetivo
+                            e necessidades.
+                        </p>
+
+                    </div>
+
+                    <div class="step reveal">
+
+                        <div class="number">
+                            02 — PLANEJAMENTO
+                        </div>
+
+                        <h3>Planejamos</h3>
+
+                        <p>
+                            Definimos estrutura, recursos
+                            e funcionamento do projeto.
+                        </p>
+
+                    </div>
+
+                    <div class="step reveal">
+
+                        <div class="number">
+                            03 — DESENVOLVIMENTO
+                        </div>
+
+                        <h3>Construímos</h3>
+
+                        <p>
+                            Desenvolvemos a solução de acordo
+                            com o planejamento.
+                        </p>
+
+                    </div>
+
+                    <div class="step reveal">
+
+                        <div class="number">
+                            04 — ENTREGA
+                        </div>
+
+                        <h3>Publicamos</h3>
+
+                        <p>
+                            Finalizamos, testamos e preparamos
+                            o projeto para utilização.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="cta reveal">
+
+                    <h2>
+                        Tem uma ideia?
+                    </h2>
+
+                    <p>
+                        Vamos transformar sua ideia em um
+                        projeto tecnológico.
+                    </p>
+
+                    <div class="buttons">
+
+                        <a
+                            href="https://wa.me/556593356398"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-primary">
+                            🚀 Começar projeto
+                        </a>
+
+                        <a
+                            href="#contato"
+                            class="btn btn-outline">
+                            📩 Ver contato
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CONTATO -->
+
+        <section id="contato">
+
+            <div class="container">
+
+                <div class="section-title reveal">
+
+                    <small>Contato</small>
+
+                    <h2>Fale com a SYSTEM BREAKERS.</h2>
+
+                    <p>
+                        Entre em contato para tirar sua ideia
+                        do papel.
+                    </p>
+
+                </div>
+
+                <div class="contact-grid">
+
+                    <div class="contact-card reveal">
+
+                        <h3>💬 WhatsApp</h3>
+
+                        <p>
+                            Atendimento e informações sobre
+                            nossos serviços.
+                        </p>
+
+                        <a
+                            href="https://wa.me/556593356398"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-link">
+                            Abrir WhatsApp →
+                        </a>
+
+                    </div>
+
+                    <div class="contact-card reveal">
+
+                        <h3>📧 E-mail</h3>
+
+                        <p>
+                            Para dúvidas, projetos e solicitações,
+                            envie uma mensagem para nossa equipe.
+                        </p>
+
+                        <a
+                            href="mailto:Suporte.system.breakers@gmail.com"
+                            class="contact-link">
+                            Enviar e-mail →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            SYSTEM <span>BREAKERS</span>
+        </div>
+
+        <p>
+            BREAK THE LIMITS. BUILD THE FUTURE.
+        </p>
+
+        <p class="copyright">
+            © <span id="year"></span> SYSTEM BREAKERS.
+            Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+
+    <button id="topBtn" aria-label="Voltar ao topo">
+        ↑
+    </button>
+
+    <script>
+
+        /* MENU MOBILE */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navMenu = document.getElementById("navMenu");
+
+        menuBtn.addEventListener("click", () => {
+
+            navMenu.classList.toggle("active");
+
+            if (navMenu.classList.contains("active")) {
+                menuBtn.textContent = "✕";
+            } else {
+                menuBtn.textContent = "☰";
+            }
+
+        });
+
+        /* FECHAR MENU */
+
+        document.querySelectorAll("nav a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navMenu.classList.remove("active");
+
+                menuBtn.textContent = "☰";
+
+            });
+
+        });
+
+        /* ANIMAÇÕES */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("active");
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        /* BOTÃO TOPO */
+
+        const topBtn =
+            document.getElementById("topBtn");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 500) {
+
+                topBtn.classList.add("show");
+
+            } else {
+
+                topBtn.classList.remove("show");
+
+            }
+
+        });
+
+        topBtn.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+        /* ANO AUTOMÁTICO */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        /* HEADER AO ROLAR */
+
+        window.addEventListener("scroll", () => {
+
+            const header =
+                document.querySelector("header");
+
+            if (window.scrollY > 30) {
+
+                header.style.background =
+                    "rgba(3,6,12,0.94)";
+
+            } else {
+
+                header.style.background =
+                    "rgba(5,7,13,0.78)";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
